@@ -23,8 +23,9 @@ func main() {
 
 	apiURL := os.Getenv("API_URL")
 	apiToken := os.Getenv("API_TOKEN")
+	databaseURL := os.Getenv("DATABASE_URL")
 
-	conn, ctx := db.ConnectDB()
+	conn, ctx := db.ConnectDB(databaseURL)
 	defer conn.Close(ctx)
 
 	fmt.Println("Inserting stocks from API")

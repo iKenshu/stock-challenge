@@ -12,11 +12,9 @@ import (
 	"github.com/jackc/pgx/v4"
 )
 
-const dsn string = "postgresql://kevin:OsM82icxLXNOkRr7ChEGFA@global-possum-8579.j77.aws-us-east-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full"
-
-func ConnectDB() (*pgx.Conn, context.Context) {
+func ConnectDB(databaseURL string) (*pgx.Conn, context.Context) {
 	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, dsn)
+	conn, err := pgx.Connect(ctx, databaseURL)
 	if err != nil {
 		log.Fatalf("Unable to connect to database: %v\n", err)
 	}
