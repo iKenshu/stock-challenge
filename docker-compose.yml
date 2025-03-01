@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - API_URL=${API_URL}
+      - API_TOKEN=${API_TOKEN}
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+
+  frontend:
+    build:
+      context: ./stock-ui
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./stock-ui:/app
+
