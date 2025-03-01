@@ -36,7 +36,7 @@ func main() {
 	http.Handle(
 		"/api/stocks",
 		corsMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			conn, ctx := db.ConnectDB()
+			conn, ctx := db.ConnectDB(databaseURL)
 			defer conn.Close(ctx)
 
 			stocks, err := db.FetchAllStocks(conn, ctx)
@@ -53,7 +53,7 @@ func main() {
 	http.Handle(
 		"/api/recommendations",
 		corsMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			conn, ctx := db.ConnectDB()
+			conn, ctx := db.ConnectDB(databaseURL)
 			defer conn.Close(ctx)
 
 			recommendations, err := db.GetBestStocks(conn, ctx)
