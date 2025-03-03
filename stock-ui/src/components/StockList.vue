@@ -103,7 +103,8 @@
 </template>
 
 <script>
-const BASE_API_URL = 'http://localhost:8080/api'
+
+const BASE_API_URL = 'https://sufxa2mlp7.execute-api.us-east-1.amazonaws.com/dev/api/'
 
 export default {
   data() {
@@ -126,7 +127,7 @@ export default {
     },
     async fetchBestStocks() {
       try {
-        const response = await fetch(`${BASE_API_URL}/stocks/recommendations`)
+        const response = await fetch(`${BASE_API_URL}/recommendations`)
         const data = await response.json()
         this.stocks = data
       } catch (error) {

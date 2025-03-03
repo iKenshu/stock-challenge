@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -17,8 +18,8 @@ func InsertStocksFromAPI(fetchStocks func() ([]models.Stock, error)) {
 	}
 
 	databaseURL := os.Getenv("DATABASE_URL")
-	conn, ctx := db.ConnectDB(databaseURL)
-	defer conn.Close(ctx)
+	dbConn := db.ConnectDB(databaseURL)
+	defer dbConn.Close(context.Background())
 
 	stocks, err := fetchStocks()
 	if err != nil {
@@ -27,7 +28,7 @@ func InsertStocksFromAPI(fetchStocks func() ([]models.Stock, error)) {
 	}
 
 	for _, stock := range stocks {
-		db.InsertStocks(conn, ctx, stock)
+		db.InsertStocks(dbConn, stock)
 	}
 
 	fmt.Println("Stocks inserted successfully")
