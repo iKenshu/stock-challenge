@@ -104,7 +104,7 @@
 
 <script>
 
-const BASE_API_URL = 'https://sufxa2mlp7.execute-api.us-east-1.amazonaws.com/dev/api/'
+const BASE_API_URL = 'https://sufxa2mlp7.execute-api.us-east-1.amazonaws.com/dev/api'
 
 export default {
   data() {

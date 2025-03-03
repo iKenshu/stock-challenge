@@ -32,12 +32,12 @@ func main() {
 
 	log.Println("Starting server on port 8080")
 	http.Handle(
-		"/api/stocks",
+		"/stocks",
 		middleware.CorsMiddleware(handlers.StocksHandler(dbConn)),
 	)
 
 	http.Handle(
-		"/api/recommendations",
+		"/recommendations",
 		middleware.CorsMiddleware(handlers.RecommendationsHandler(dbConn)),
 	)
 

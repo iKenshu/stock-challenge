@@ -188,7 +188,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/stock-api/dev/1741012004265-2025-03-03T14:26:44.265Z/function-stocks.zip"
+                "S3Key": "serverless/stock-api/dev/1741029766778-2025-03-03T19:22:46.778Z/function-stocks.zip"
               },
               "Handler": "bootstrap",
               "Runtime": "provided.al2",
@@ -221,7 +221,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/stock-api/dev/1741012004265-2025-03-03T14:26:44.265Z/function-recommendations.zip"
+                "S3Key": "serverless/stock-api/dev/1741029766778-2025-03-03T19:22:46.778Z/function-recommendations.zip"
               },
               "Handler": "bootstrap",
               "Runtime": "provided.al2",
@@ -247,24 +247,24 @@
               "RecommendationDashapiLogGroup"
             ]
           },
-          "RecommendationDashapiLambdaVersionxOgjo7BCdUXLP94Qw4SVYcfOBI7J0PbWuPofC1jLcY": {
+          "RecommendationDashapiLambdaVersionPw4bjmgrYVais9LC8L6MtCiPWZcN6SeEa3e0MzJycI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "RecommendationDashapiLambdaFunction"
               },
-              "CodeSha256": "AfjQxW5El/dw2CGhqx+pRADmO17eLq/frE5hogxRwDU="
+              "CodeSha256": "9IAXuAhu8nfIRUCNRMjgvKlPiToWXYLOaLxMBOvcQU4="
             }
           },
-          "StockDashapiLambdaVersionAEVAN9hBjglngGdNL7DS1qehY9BeRzW5TLtl1pkxWF4": {
+          "StockDashapiLambdaVersionJGMubWPwb8EWtzwNGPqTEc7evfXF025npAzmwLWfs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "StockDashapiLambdaFunction"
               },
-              "CodeSha256": "wsdp20pbPk6SFkDzi/lu2+6Kwpzz12bTzFVsMYsuTtI="
+              "CodeSha256": "LtUUkSOuVeBNVATyW7RP/TPxxXy1Ja4IElyli4WXqwc="
             }
           },
           "ApiGatewayRestApi": {
@@ -313,6 +313,96 @@
                 "Ref": "ApiGatewayResourceApi"
               },
               "PathPart": "recommendations",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodApiStocksOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiStocks"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodApiRecommendationsOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiRecommendations"
+              },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -410,7 +500,7 @@
               "RecommendationDashapiLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1741012003193": {
+          "ApiGatewayDeployment1741029765466": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -419,6 +509,8 @@
               "StageName": "dev"
             },
             "DependsOn": [
+              "ApiGatewayMethodApiStocksOptions",
+              "ApiGatewayMethodApiRecommendationsOptions",
               "ApiGatewayMethodApiStocksGet",
               "ApiGatewayMethodApiRecommendationsGet"
             ]
@@ -510,7 +602,7 @@
           "RecommendationDashapiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "RecommendationDashapiLambdaVersionxOgjo7BCdUXLP94Qw4SVYcfOBI7J0PbWuPofC1jLcY"
+              "Ref": "RecommendationDashapiLambdaVersionPw4bjmgrYVais9LC8L6MtCiPWZcN6SeEa3e0MzJycI"
             },
             "Export": {
               "Name": "sls-stock-api-dev-RecommendationDashapiLambdaFunctionQualifiedArn"
@@ -519,7 +611,7 @@
           "StockDashapiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "StockDashapiLambdaVersionAEVAN9hBjglngGdNL7DS1qehY9BeRzW5TLtl1pkxWF4"
+              "Ref": "StockDashapiLambdaVersionJGMubWPwb8EWtzwNGPqTEc7evfXF025npAzmwLWfs"
             },
             "Export": {
               "Name": "sls-stock-api-dev-StockDashapiLambdaFunctionQualifiedArn"
@@ -650,6 +742,23 @@
             "http": {
               "path": "api/stocks",
               "method": "get",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
               "integration": "AWS_PROXY"
             }
           }
@@ -658,7 +767,7 @@
         "memory": 128,
         "timeout": 10,
         "vpc": {},
-        "versionLogicalId": "StockDashapiLambdaVersionAEVAN9hBjglngGdNL7DS1qehY9BeRzW5TLtl1pkxWF4"
+        "versionLogicalId": "StockDashapiLambdaVersionJGMubWPwb8EWtzwNGPqTEc7evfXF025npAzmwLWfs"
       },
       "recommendation-api": {
         "handler": "bootstrap",
@@ -671,6 +780,23 @@
             "http": {
               "path": "api/recommendations",
               "method": "get",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
               "integration": "AWS_PROXY"
             }
           }
@@ -679,7 +805,7 @@
         "memory": 128,
         "timeout": 10,
         "vpc": {},
-        "versionLogicalId": "RecommendationDashapiLambdaVersionxOgjo7BCdUXLP94Qw4SVYcfOBI7J0PbWuPofC1jLcY"
+        "versionLogicalId": "RecommendationDashapiLambdaVersionPw4bjmgrYVais9LC8L6MtCiPWZcN6SeEa3e0MzJycI"
       }
     },
     "configValidationMode": "warn",
@@ -701,7 +827,7 @@
           "docker-compose.yml"
         ],
         "artifactsS3KeyDirname": "serverless/stock-api/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/stock-api/dev/1741012004265-2025-03-03T14:26:44.265Z"
+        "artifactDirectoryName": "serverless/stock-api/dev/1741029766778-2025-03-03T19:22:46.778Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -712,7 +838,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/stock-api/dev/1741012004265-2025-03-03T14:26:44.265Z",
+    "artifactDirectoryName": "serverless/stock-api/dev/1741029766778-2025-03-03T19:22:46.778Z",
     "artifact": ""
   }
 }

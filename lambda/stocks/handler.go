@@ -1,4 +1,4 @@
-package lambda
+package stockslambda
 
 import (
 	"context"
@@ -43,7 +43,10 @@ func StocksLambdaHandler(ctx context.Context) (events.APIGatewayProxyResponse, e
 	return events.APIGatewayProxyResponse{
 		StatusCode: http.StatusOK,
 		Headers: map[string]string{
-			"Content-Type": "application/json",
+			"Content-Type":                 "application/json",
+			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+			"Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
 		},
 		Body: string(body),
 	}, nil

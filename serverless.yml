@@ -34,6 +34,8 @@ functions:
       - http:
           path: /api/stocks
           method: get
+          cors: true
+
 
   recommendation-api:
     handler: bootstrap
@@ -44,3 +46,4 @@ functions:
       - http:
           path: /api/recommendations
           method: get
+          cors: true

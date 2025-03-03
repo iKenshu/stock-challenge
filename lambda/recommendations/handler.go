@@ -1,4 +1,4 @@
-package lambda
+package recommendationslambda
 
 import (
 	"context"
@@ -22,7 +22,9 @@ func RecommendationsLambdaHandler(ctx context.Context) (events.APIGatewayProxyRe
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusInternalServerError,
 			Headers: map[string]string{
-				"Content-Type": "application/json",
+				"Content-Type":                 "application/json",
+				"Access-Control-Allow-Origin":  "*",
+				"Access-Control-Allow-Methods": "GET",
 			},
 			Body: err.Error(),
 		}, nil
@@ -34,7 +36,9 @@ func RecommendationsLambdaHandler(ctx context.Context) (events.APIGatewayProxyRe
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusInternalServerError,
 			Headers: map[string]string{
-				"Content-Type": "application/json",
+				"Content-Type":                 "application/json",
+				"Access-Control-Allow-Origin":  "*",
+				"Access-Control-Allow-Methods": "GET",
 			},
 			Body: err.Error(),
 		}, nil
@@ -43,7 +47,9 @@ func RecommendationsLambdaHandler(ctx context.Context) (events.APIGatewayProxyRe
 	return events.APIGatewayProxyResponse{
 		StatusCode: http.StatusOK,
 		Headers: map[string]string{
-			"Content-Type": "application/json",
+			"Content-Type":                 "application/json",
+			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Methods": "GET",
 		},
 		Body: string(body),
 	}, nil
